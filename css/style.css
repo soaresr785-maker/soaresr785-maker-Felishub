@@ -1,103 +1,92 @@
-body{
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-margin:0;
+<head>
 
-font-family:Arial;
+<meta charset="UTF-8">
 
-background:#ececec;
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-}
+<title>FelisHub</title>
 
-header{
+<link rel="stylesheet" href="css/style.css">
 
-background:#1d3557;
+</head>
 
-color:white;
+<body>
 
-padding:20px;
+<header>
 
-display:flex;
+<h1>🐱 FelisHub</h1>
 
-justify-content:space-between;
+<button id="btnNovo">
+Novo Paciente
+</button>
 
-align-items:center;
+</header>
 
-}
+<main>
 
-#lista{
+<div id="lista"></div>
 
-padding:20px;
+</main>
 
-display:grid;
+<div id="modal" class="modal">
 
-grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+<div class="janela">
 
-gap:20px;
+<h2>Novo Paciente</h2>
 
-}
+<form id="form">
 
-.card{
+<input
+type="text"
+id="nome"
+placeholder="Nome"
+required>
 
-background:white;
+<input
+type="text"
+id="microchip"
+placeholder="Microchip">
 
-padding:20px;
+<input
+type="text"
+id="tutor"
+placeholder="Tutor">
 
-border-radius:10px;
+<select id="setor">
 
-box-shadow:0 2px 8px rgba(0,0,0,.2);
+<option>CTI</option>
 
-}
+<option>Gatil</option>
 
-.modal{
+</select>
 
-display:none;
+<button type="submit">
 
-position:fixed;
+Salvar
 
-left:0;
+</button>
 
-top:0;
+</form>
 
-width:100%;
+<button id="fechar">
 
-height:100%;
+Fechar
 
-background:rgba(0,0,0,.6);
+</button>
 
-justify-content:center;
+</div>
 
-align-items:center;
+</div>
 
-}
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-.janela{
+<script src="js/supabase.js"></script>
 
-background:white;
+<script src="js/app.js"></script>
 
-padding:20px;
+</body>
 
-border-radius:10px;
-
-width:350px;
-
-}
-
-input,select{
-
-width:100%;
-
-padding:10px;
-
-margin-bottom:10px;
-
-box-sizing:border-box;
-
-}
-
-button{
-
-padding:10px;
-
-cursor:pointer;
-
-}
+</html>
