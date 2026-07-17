@@ -1,87 +1,100 @@
-const pacientes = [];
+const lista=document.getElementById("lista");
 
-const lista = document.getElementById("listaPacientes");
+const modal=document.getElementById("modal");
 
-const modal = document.getElementById("modalPaciente");
+document
+.getElementById("btnNovo")
+.onclick=()=>{
 
-const btnNovo = document.getElementById("novoPaciente");
+modal.style.display="flex";
 
-const fechar = document.querySelector(".fechar");
+};
 
-const form = document.getElementById("formPaciente");
+document
+.getElementById("fechar")
+.onclick=()=>{
 
-btnNovo.addEventListener("click", () => {
-    modal.style.display = "flex";
-});
+modal.style.display="none";
 
-fechar.addEventListener("click", () => {
-    modal.style.display = "none";
-});
+};
 
-window.addEventListener("click", (e) => {
-    if (e.target === modal) {
-        modal.style.display = "none";
-    }
-});
+async function carregarPacientes(){
 
-function renderizar(){
+const {data,error}=await banco
+.from("pacientes")
+.select("*")
+.order("id",{ascending:false});
 
-    lista.innerHTML = "";
+if(error){
 
-    pacientes.forEach((paciente, indice)=>{
+console.error(error);
 
-        lista.innerHTML += `
-            <div class="card">
-
-                <h2>${paciente.nome}</h2>
-
-                <p>Microchip: ${paciente.microchip}</p>
-
-                <p>Setor: ${paciente.setor}</p>
-
-                <button onclick="abrirPaciente(${indice})">
-                    Abrir
-                </button>
-
-            </div>
-        `;
-
-    });
+return;
 
 }
 
-form.addEventListener("submit",(e)=>{
+lista.innerHTML="";
 
-    e.preventDefault();
+data.forEach(p=>{
 
-    pacientes.push({
+lista.innerHTML+=`
 
-        nome:document.getElementById("nome").value,
+<div class="card">
 
-        microchip:document.getElementById("microchip").value,
+<h2>${p.nome}</h2>
 
-        setor:document.getElementById("setor").value
+<p><b>Tutor:</b> ${p.tutor??""}</p>
 
-    });
+<p><b>Microchip:</b> ${p.microchip??""}</p>
 
-    form.reset();
+<p><b>Setor:</b> ${p.setor}</p>
 
-    modal.style.display="none";
+</div>
 
-    renderizar();
+`;
 
 });
 
-function abrirPaciente(indice){
+}
 
-    const paciente = pacientes[indice];
+document
+.getElementById("form")
+.addEventListener("submit",async(e)=>{
 
-    alert(
-`Nome: ${paciente.nome}
+e.preventDefault();
 
-Microchip: ${paciente.microchip}
+const paciente={
 
-Setor: ${paciente.setor}`
-    );
+nome:document.getElementById("nome").value,
+
+microchip:document.getElementById("microchip").value,
+
+tutor:document.getElementById("tutor").value,
+
+setor:document.getElementById("setor").value
+
+};
+
+const {error}=await banco
+
+.from("pacientes")
+
+.insert([paciente]);
+
+if(error){
+
+alert(error.message);
+
+return;
 
 }
+
+modal.style.display="none";
+
+e.target.reset();
+
+carregarPacientes();
+
+});
+
+carregarPacientes();
