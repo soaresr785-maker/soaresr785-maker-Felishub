@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FelisHub</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>🐱 FelisHub</h1>
+    </header>
+
+    <main>
+
+        <button id="novoPaciente">
+            ➕ Novo Paciente
+        </button>
+
+        <section id="listaPacientes"></section>
+
+    </main>
+
+    <!-- Modal -->
+
+    <div id="modalPaciente" class="modal">
+
+        <div class="modal-content">
+
+            <span class="fechar">&times;</span>
+
+            <h2>Novo Paciente</h2>
+
+            <form id="formPaciente">
+
+                <label>Nome</label>
+                <input type="text" id="nome" required>
+
+                <label>Microchip</label>
+                <input type="text" id="microchip" required>
+
+                <label>Setor</label>
+
+                <select id="setor">
+                    <option>CTI</option>
+                    <option>Gatil</option>
+                </select>
+
+                <button type="submit">
+                    Salvar
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>
